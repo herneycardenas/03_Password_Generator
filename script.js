@@ -1,37 +1,64 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
+let generateBtn = document.querySelector("#generate");
+
+    //need values for lower/upper/numbers/special characters
+let valueLowercase = "abcdefghijklmnopqrstuvwxyz"
+let valueUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let valueNumber = "0123456789"
+let valueSpecialCharacters = "~!@#$%^&*()_+"
+
+let value = "";
 
 // Write password to the #password input
 function writePassword() {
 
-  let confirmCharacters = prompt ("How many characters does your password need to be?");
+value ="";
+let confirmCharacters = prompt ("How many characters does your password need to be?");
 
-if (confirmCharacters >= 8);
-
-else if (confirmCharacters <=7) {
- alert("Character length must be more than 8!");
+if (confirmCharacters <=7 || confirmCharacters >= 129) {
+  alert("Character length must be 8 - 128")
+  return
 }
-else if (confirmCharacters >=128) {
- alert("Character Length Must Be 8-128!");
-}
+else {
+  confirmLowercase = confirm("Would you like lowercases characters?");
+  confirmUppercase = confirm ("Would you like uppercases characters?");
+  confirmNumber = confirm ("Would you like numeric characters?");
+  confirmSpecialCharacters = confirm ("Would you like special characters?");
 
-//let confirmLowercase = confirm("Would you like lowercases characters?");
-  //if (confirmLowercase === true) 
+if (!confirmLowercase && !confirmUppercase && !confirmNumber && !confirmSpecialCharacters);
+};
 
+if (confirmLowercase) {
+value += valueLowercase
+};
 
-let confirmUppercase = confirm ("Would you like uppercases characters?");
-let confirmNumeric = confirm ("Would you like numeric characters?");
-let confirmSpecialCharacters = confirm ("Would you like special characters?");
+if (confirmUppercase) {
+value += valueUppercase
+};
 
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+if (confirmNumber) {
+value += valueNumber
+};
+
+if (confirmSpecialCharacters) {
+value += valueSpecialCharacters
+};
+
+console.log(value);
+
+let passwordText = document.querySelector("#password");
+let password = "";
+
+ for (i = 0; i < confirmCharacters; i++) {
+   password = password + value.charAt(Math.floor(Math.random() * value.length))
+  };
+
+  console.log(password);
 
   passwordText.value = password;
- 
+ };
 
-}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
 
